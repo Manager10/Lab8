@@ -22,7 +22,14 @@ public class MessageListServlet extends ChatServlet {
         int i;
         for(i = messages.size()-1; i >= 0; i--) {
             ChatMessage aMessage = messages.get(i);
-            pw.println("<div><strong>"+ aMessage.getAuthor().getName() + ": "+ aMessage.getMessage() +  "</span></strong></div>");
+            double temp = (double)i / messages.size();
+            if (temp > 0.6)
+                pw.println("<div><strong>"+ aMessage.getAuthor().getName() + " :<style> .colortext { color:red;} </style> <span class=colortext>"+ aMessage.getMessage() +  "</span></strong></div>");
+            if (temp > 0.2 && temp < 0.6)
+                pw.println("<div><strong>"+ aMessage.getAuthor().getName() + " :<style> .colortext1 { color:black;} </style> <span class=colortext1>"+ aMessage.getMessage() +  "</span></strong></div>");
+            if (temp < 0.2)
+                pw.println("<div><strong>"+ aMessage.getAuthor().getName() + " :<style> .colortext2 { color:green;} </style> <span class=colortext2>"+ aMessage.getMessage() +  "</span></strong></div>");
+
         }
 
         pw.println("</body></html>");
